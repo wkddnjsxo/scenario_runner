@@ -1,0 +1,1 @@
+python3 /root/aim_ws/grpc_inha_univ/src/grpc_example_new2.py

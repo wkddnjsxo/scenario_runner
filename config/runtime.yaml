@@ -1,0 +1,10 @@
+grpc:
+  host: 192.168.80.1
+  port: 7789
+  client_key: aim_scenario_runner
+morai:
+  map_name: R_KR_PG_K-City
+  ego_vehicle_model: 2023_Hyundai_Ioniq5
+paths:
+  grpc_src: grpc_inha_univ/src
+  mgeo_root: R_KR_PG_KATRI

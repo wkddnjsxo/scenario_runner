@@ -1,0 +1,29 @@
+{
+  "saved_utc_time": "2025-01-15 06:43:38.634364",
+  "mgeo_file_hash": "{'crosswalk_set.json': '9d88f056e775e2620f926ffcfc73922a7315ac95fb45b0770210be55b9d25a04', 'crosswalk_set.json.meta': '91b806255c365349d061ee33daf9ae81c518fbd8dacfca2a5e838f375530dde1', 'ErrorLinkPath.txt': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'ErrorLinkPath.txt.meta': 'ae2711451cf8275d0aad56d27fa9ca2bf70bbedb6d78944af3ef8336499f3d71', 'global_info.json.meta': '7a74bb6e5b730cfcc3f706d52b5e104661c0d30848b904449c3c24757b409041', 'intersection_controller_data.json': '9b2069448c997f2f7e7fca78788b112e4cd4fc37a946d9e2eddcce607fe6bf7d', 'intersection_controller_data.json.meta': 'cb2a93916f7ccb9ed31e47e79ee6de82a6e1c5025218c30c607aa0b364fe9c88', 'intersection_controller_set.json': '76d4daa7f8a007138624d0159c3f5793e3297c8a4f2f2df00dd6927c38579ae1', 'intersection_controller_set.json.meta': '1a71c650949090bb172eaa7a921461e38670c76f4589a37e94e10d3707146acb', 'junction_group_set.json': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', 'junction_group_set.json.meta': '278f45f3472cd2b1d0a89b1070966ea5c3b8d7d460d1682bc0574a5ddfaec50c', 'junction_set.json': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', 'junction_set.json.meta': '4bbe46e37d0a4bf0a00b02e0e8c3699befe332a9bf0b9472cc33ad7439885702', 'lane_boundary_set.json': 'ed2666d5bf087ed8db3de828b6ee65bacea70ac68de279aec9999b59293ad806', 'lane_boundary_set.json.meta': 'e1fc4bb98ababca3fe4c117b4d2b84997b8e155ea2db1bdcdfac4145f8302b43', 'lane_node_set.json': '638d0444a2905d62d4bcd7696901738d9910855584e2f94d83bd9ce606140314', 'lane_node_set.json.meta': '5625987ad92a56c344b7b773861cc06de65bf41e38247ea48e758678154529f0', 'link_set.json': '0c15ff96bb08856adf10b8de3e3fa24dd1dc0287141257eb99893c3f33ef22d7', 'link_set.json.meta': 'c5d9e41d9212faf0402f976559719428312a6c00bbfc78035d8811d972632fa1', 'node_set.json': '0484fc036f1c19e0307f35a26fda85affb3438875cf78e65fc9ac476546790ed', 'node_set.json.meta': '563e88aa67f34d79ea6d555804368c5b50f3489d069d4e26a4dd9e201575bddd', 'object_set.json': 'ee3a8f6aed261977a884aa2fb6e930f6e1bd8470f0ea26bd8d376360a82ae125', 'object_set.json.meta': '7117c2555d69a85859c98eda684e9f126b52b6450af3a2ed9fd8767922d5b178', 'parking_space_set.json': '0d410f76591ad9bd028c8950fe79fb07453511446caebecf6a9156280783f25b', 'parking_space_set.json.meta': '6417cc14d2cd17caab3a3deccaf1b6ca4c34c56c2db99f5c07adc026730fb2c7', 'road_polygon_set.json': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', 'road_polygon_set.json.meta': 'df808a83ac785eeaadf6ec2492d0dd2614fb0039ea4d863c42419b88b6a0d567', 'road_set.json': '4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945', 'road_set.json.meta': '0d0ba0330987cc054e4feb5f5179fdc834aba2d45f171c2c45037710ff2be758', 'singlecrosswalk_set.json': '65924f42cae58ce94e5884c71ba79fcd9364d2c72d3ad16eeb26902eefacd4cd', 'singlecrosswalk_set.json.meta': 'e5cfa4b2fa68a1b4fb52ea8b8b64fc8ec50e633a41a477e1d7c23e46b7e1756f', 'surface_marking_set.json': '4ee667744ffdbe16f38c51f5524d12360e84f5c05e477a659371573001a9e139', 'surface_marking_set.json.meta': 'd9a2c2fe4ac197c25c2681bac03c15dda22b30ef45d158503758a6715078df0d', 'synced_traffic_light_set.json': 'fba3b09964d297258560629148714032623ab6d6c61757ccaf258a555ce41550', 'synced_traffic_light_set.json.meta': '6beed6d07029c5bc069b69a3029ef97341ecdb7b5cc846a0b37345e00f6afb08', 'traffic_light_set.json': 'c9f4c00a47d4cacab7974bb8a4d867511e3ea95e421d74b7729fe5f367eb7697', 'traffic_light_set.json.meta': 'ffdadbcde48158b62339ba7941774e339d7bb50e95e9858d9b41b91c505fbd3a', 'traffic_sign_set.json': '5bb6003b3e7bdf9c67302239d506b31d92f6658a51aeea9602d4291d440f0b5d', 'traffic_sign_set.json.meta': '326db8c1537a68c671cc31c8468c18780ec4d8ef33cb1bcb5b61c99332a4bb60'}",
+  "maj_ver": 3,
+  "min_ver": 0,
+  "global_coordinate_system": "+proj=utm +zone=52 +ellps=WGS84 +units=m +no_defs",
+  "workspace_coordinate_system": "+proj=utm +zone=52 +ellps=WGS84 +units=m +no_defs",
+  "local_origin_in_global": [
+    302459.942,
+    4122635.537,
+    28.991
+  ],
+  "workspace_origin": [
+    168.0,
+    1461.0,
+    -72.0
+  ],
+  "lane_change_link_included": false,
+  "traffic_dir": "RHT",
+  "country": "Korea, Republic of",
+  "road_type": "town",
+  "road_type_def": "",
+  "data_source": "",
+  "east_grids": [],
+  "west_grids": [],
+  "south_grids": [],
+  "north_grids": [],
+  "license": "MORAI Inc."
+}

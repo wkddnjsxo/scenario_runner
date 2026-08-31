@@ -1,0 +1,25 @@
+class ScenarioBase:
+    zone_name = None
+    scenario_name = None
+
+    def __init__(self, sim_bridge, map_loader, global_cfg, scenario_cfg):
+        self.grpc = sim_bridge
+        self.map_loader = map_loader
+        self.global_cfg = global_cfg
+        self.cfg = scenario_cfg
+
+    def setup(self):
+        raise NotImplementedError
+
+    def run_timeline(self):
+        raise NotImplementedError
+
+    def cleanup(self):
+        pass
+
+    def run(self):
+        try:
+            self.setup()
+            self.run_timeline()
+        finally:
+            self.cleanup()

@@ -1,0 +1,26 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments and local tooling
+.venv/
+venv/
+.env
+.env.*
+
+# Machine-specific configuration
+config/local_override.yaml
+
+# Runtime output and generated checks
+runtime/
+ego_pose_checks/
+
+# Editor and OS metadata
+.vscode/
+.idea/
+.DS_Store
+
+# Local backup files
+*.bak
+*.bak_*
+*~

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package morai_sim_api.map;
+
+import "morai/common/resource_identifier.proto";
+
+option optimize_for = SPEED;
+option csharp_namespace = "CoreLib.Grpc.Protobuf.MoraiSimAPI.Map";
+
+message LinkInfo
+{
+	ResourceIdentifier id = 1;
+	int32 waypoint_idx = 2;
+}

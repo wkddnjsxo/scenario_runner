@@ -1,0 +1,3 @@
+paths:
+  mgeo_root: R_KR_PG_KATRI
+  grpc_src: grpc_inha_univ/src

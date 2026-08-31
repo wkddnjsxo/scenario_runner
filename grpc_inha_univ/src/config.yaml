@@ -1,0 +1,80 @@
+# MORAI gRPC 시뮬레이션 설정
+# 외부 터미널에서 ./run_experiment.sh 3 이 실행되고 있는 상태에서
+# 이 파이썬 코드는 일정 시간마다 차량을 초기 위치로 보내고
+# 속도/조향을 0으로 만드는 역할만 수행한다.
+
+# ---------------------------------------------------------------
+# 초기 차량 위치 (리셋 시 돌아갈 위치)
+# ---------------------------------------------------------------
+initial_position:
+  x: -69.95460510253906
+  y: 1065.4755859375
+  z: -0.2743110656738281
+  roll: 0.0
+  pitch: 0.0
+  yaw: 125.08766174316406   # heading
+
+# ---------------------------------------------------------------
+# 리셋 조건 설정
+# ---------------------------------------------------------------
+reset_config:
+  # 시간 기반 리셋: 10초마다 초기 위치로
+  time_based_reset: true
+  reset_interval: 10.0          # 단위: 초
+
+  # 그 외 옵션 (필요할 때 켜서 사용)
+  speed_based_reset: false
+  max_speed: 40.0               # km/h
+
+  distance_based_reset: false
+  max_distance: 50.0            # m
+
+  error_based_reset: false
+
+# ---------------------------------------------------------------
+# 리셋 직후 차량에 보낼 "0 제어 명령" 값
+# (외부 컨트롤러가 다시 명령을 보내기 전까지 차량이 정지 상태로 시작하도록 함)
+# ---------------------------------------------------------------
+zero_control:
+  # LongCmdType
+  #   0: UNSPECIFIED, 1: THROTTLE, 2: SPEED, 3: ACCELERATION, 4: GHOST
+  long_cmd_type: 2              # SPEED 모드 (velocity=0 이면 정지)
+  throttle: 0.0
+  brake: 0.0
+  steer: 0.0
+  velocity: 0.0
+  acceleration: 0.0
+  # 외부 컨트롤러(run_experiment.sh)가 곧바로 새 명령을 덮어쓰지 못하도록
+  # 짧은 간격으로 여러 번 0 명령을 보낸다.
+  repeat_count: 10              # 반복 횟수
+  repeat_interval: 0.02         # 반복 간격 (초)
+
+# ---------------------------------------------------------------
+# gRPC 연결 설정
+# ---------------------------------------------------------------
+grpc_config:
+  address: "127.0.0.1"
+  port: 7789
+  ego_id: "Ego"
+  client_key: "Morai_Example"
+
+# ---------------------------------------------------------------
+# 제어 모드 설정 (시작 시 한 번만 설정)
+#   VEHICLE_CONTROL_UNSPECIFIED = 0
+#   VEHICLE_CONTROL_KEYBOARD    = 1
+#   VEHICLE_CONTROL_GAME_WHEEL  = 2
+#   VEHICLE_CONTROL_AUTO_MODE   = 3  ← 외부 제어 (run_experiment.sh)
+#   VEHICLE_CONTROL_CRUISE_MODE = 6
+# ---------------------------------------------------------------
+control_mode:
+  set_on_start: true            # 시작 시 모드 강제 설정 여부
+  mode_type: 3                  # AUTO_MODE
+
+# ---------------------------------------------------------------
+# 시뮬레이션 루프 설정
+# ---------------------------------------------------------------
+simulation:
+  initial_wait_time: 2.0        # 초기 설정 후 대기 시간 (초)
+  check_interval: 0.2           # 메인 루프 주기 (초)
+  log_interval: 2.0             # 상태 출력 주기 (초)
+  max_iterations: 10            # 10번 리셋 후 종료 (0 이면 무한)

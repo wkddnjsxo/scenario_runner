@@ -1,0 +1,487 @@
+zone: urban
+scenarios:
+  random_route_drive:
+    start_link: A219BS010404
+    end_link: A219BS010469
+    randomize_links: true
+    zone_links_path: config/urban_route_links.yaml
+    allow_connector_links: false
+    random_route_stay_in_zone: true
+    random_route_attempts: 300
+    random_route_pool_enabled: true
+    random_recent_start_memory: 8
+    random_recent_route_memory: 16
+    random_min_route_length_m: 40.0
+    random_max_route_length_m: 600.0
+    random_min_actual_drive_length_m: 40.0
+    random_max_actual_drive_length_m: 600.0
+    random_max_route_links: 0
+    random_max_route_point_gap_m: 8.0
+    route_setup_attempts: 5
+    drive_control_mode: pure_pursuit
+    dataset_enabled: true
+    dataset_root: /home/jang/dataset
+    dataset_scene_prefix: scene
+    dataset_scene_digits: 2
+    dataset_collect_root: /home/jang/dataset
+    dataset_collect_scene_prefix: scen
+    dataset_stop_scene_index: 150
+    dataset_stop_settle_sec: 5.0
+    saved_ego_positions_path: config/saved_ego_positions.yaml
+    use_saved_candidate_start_pose: true
+    use_saved_candidate_goal_pose: true
+    npc:
+      enabled: true
+      update_interval_sec: 0.5
+      max_spawn_attempts: 20
+      spawn_margin_from_route_end_m: 8.0
+      auto_find_opposite_links: true
+      opposite_link_search_max_distance_m: 25.0
+      opposite_link_min_overlap_ratio: 0.25
+      opposite_link_min_yaw_diff_deg: 135.0
+      vehicle_model:
+        allowed_categories:
+          - sedan
+          - suv
+          - mpv
+          - wagon
+        exclude_prefixes:
+          - Default_
+          - Defalut_
+          - DEFAULT_
+        whitelist:
+          - 2017_Hyundai_Grandeur
+          - 2016_Hyundai_Sonata
+          - 2015_Kia_K5
+          - 2014_Kia_K7
+          - 2016_Hyundai_Ioniq
+          - 2020_hyundai_sonata
+          - 2020_Kia_Stinger
+          - 2021_Hyundai_G80
+          - 2019_Toyota_Prius
+          - 2019_hyundai_genesis_g90
+          - 2016_Hyundai_Genesis_DH
+          - 2020_Kia_K5
+          - 2019_hyundai_genesis_g90_4WS
+          - 2016_Hyundai_Santafe
+          - 2017_Kia_Sorento
+          - 2017_Kia_Niro(HEV)
+          - 2019_Hyundai_Nexo
+          - 2020_volvo_xc90
+          - 2021_Hyundai_Genesis_GV80
+          - 2021_Volkswagen_Golf_GTI
+          - 2021_Hyundai_GV70
+          - 2023_Kia_EV6
+          - 2023_Hyundai_Ioniq5
+          - DR_KGTorres_EVX_2024
+          - 2015_Toyota_Prius(HEV)
+          - 2019_Hyundai_Kona(EV)
+          - 2020_Kia_Niro(EV)
+          - 2016_Kia_Soul(EV)
+          - 2020_Kia_Soul(EV)
+          - 2019_kia_sedona
+          - 2021_Kia_Carnival
+          - 2020_chrysler_pacifica_hybrid
+      spawn_slots:
+        front:
+          s_offset_m: [20.0, 30.0]
+          lateral_offset_m: 0.0
+        left_front:
+          s_offset_m: [10.0, 30.0]
+          adjacent: left
+          allow_visible_spawn: false
+          allow_close_spawn: true
+        right_front:
+          s_offset_m: [10.0, 30.0]
+          adjacent: right
+          allow_visible_spawn: false
+          allow_close_spawn: true
+        opposite_front:
+          s_offset_m: [45.0, 60.0]
+          lateral_offset_m: 0.0
+          opposite: true
+      spawn_slots_by_road_group:
+        1차선:
+          - front
+          - opposite_front
+        2차선(오른쪽):
+          - front
+          - front
+          - front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - left_front
+          - left_front
+          - left_front
+        2차선(왼쪽):
+          - front
+          - front
+          - front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - right_front
+          - right_front
+          - right_front
+        3차선(중간):
+          - front
+          - front
+          - front
+          - front
+          - front
+          - front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - left_front
+          - left_front
+          - left_front
+          - right_front
+          - right_front
+          - right_front
+        3차선(오른쪽):
+          - front
+          - front
+          - front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - left_front
+          - left_front
+          - left_front
+        3차선(왼쪽):
+          - front
+          - front
+          - front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - opposite_front
+          - right_front
+          - right_front
+          - right_front
+        일방통행:
+          - front
+        default:
+          - front
+      road_groups:
+        1차선:
+          has_opposite_lane: true
+          opposite_links: {}
+        2차선(오른쪽):
+          has_opposite_lane: true
+          opposite_links: {}
+        2차선(왼쪽):
+          has_opposite_lane: true
+          opposite_links: {}
+        3차선(중간):
+          has_opposite_lane: true
+          opposite_links: {}
+        3차선(오른쪽):
+          has_opposite_lane: true
+          opposite_links: {}
+        3차선(왼쪽):
+          has_opposite_lane: true
+          opposite_links: {}
+        일방통행:
+          has_opposite_lane: false
+          opposite_links: {}
+      spawn_management:
+        target_npc_count_min: 3
+        target_npc_count_max: 5
+        target_npc_count_by_road_group:
+          일방통행: [1, 2]
+          1차선: [3, 4]
+          2차선(오른쪽): [3, 4]
+          2차선(왼쪽): [3, 4]
+          3차선(중간): [3, 4]
+          3차선(오른쪽): [3, 4]
+          3차선(왼쪽): [3, 4]
+        despawn_distance_behind_m: 210.0
+        despawn_distance_ahead_m: 390.0
+        despawn_keep_radius_m: 80.0
+        despawn_keep_route_distance_m: 90.0
+        route_projection_back_window_m: 40.0
+        route_projection_front_window_m: 80.0
+        min_distance_from_ego_m: 18.0
+        min_xy_distance_from_ego_m: 18.0
+        min_distance_between_npcs_m: 8.0
+        initial_spawn_settle_sec: 1.0
+        spawn_grace_sec: 3.0
+        visibility_grace_sec: 3.0
+        outside_confirm_frames: 10
+        camera_delete_front_m: 130.0
+        camera_delete_rear_m: 40.0
+        camera_delete_side_m: 60.0
+        replacement_spawn_offset_m: [80.0, 170.0]
+        replacement_spawn_step_m: 10.0
+        replacement_min_remaining_route_m: 80.0
+        replacement_min_forward_m: 25.0
+        replacement_max_forward_m: 180.0
+        replacement_max_abs_left_m: 90.0
+        npc_status_log_interval_sec: 5.0
+        spawn_deferred_log_interval_sec: 5.0
+        wait_until_ego_close: true
+        activate_distance_m: [20.0, 30.0]
+        opposite_activate_distance_m: [40.0, 55.0]
+        waiting_stop_refresh_interval_sec: 0.5
+        active_speed_hold_interval_sec: 0.5
+        speed_guard_enabled: true
+        speed_guard_max_kmh: 18.0
+        speed_guard_correction_interval_sec: 1.0
+        protect_waiting_npcs: true
+        waiting_despawn_behind_m: 30.0
+        stuck_npc_cleanup_enabled: true
+        stuck_npc_grace_sec: 4.0
+        stuck_npc_speed_mps: 0.5
+        stuck_npc_progress_m: 0.5
+        stuck_npc_duration_sec: 2.0
+        npc_state_miss_remove_count: 20
+        npc_state_query_bulk_first: true
+        npc_state_individual_fallback: true
+        npc_state_individual_fallback_interval_sec: 1.0
+        npc_state_miss_log_interval_sec: 2.0
+        npc_state_recovery_log_min_misses: 2
+        same_direction_route_extension_m: 320.0
+        same_direction_route_extension_max_links: 18
+        opposite_route_min_length_m: 320.0
+        opposite_route_max_links: 18
+        adjacent_route_min_length_m: 320.0
+        adjacent_route_max_links: 18
+        adjacent_route_allow_unavoidable_overlap: true
+        speed_ramp_enabled: true
+        visible_activation_start_speed_kmh: 8.0
+        speed_ramp_step_kmh: 2.0
+        speed_ramp_interval_sec: 1.0
+      speed:
+        fixed_kmh: 15.0
+        same_direction_kmh: [12.0, 12.0]
+        opposite_direction_kmh: [12.0, 12.0]
+        stopped_probability: 0.0
+      ros_object_state:
+        enabled: true
+        topic: /Object_topic
+        max_age_sec: 1.0
+      camera_visibility:
+        enabled: true
+        margin_deg: 10.0
+        margin_m: 15.0
+        spawn_margin_deg: 0.0
+        spawn_margin_m: 0.0
+        reject_spawn_if_visible: true
+        cameras:
+          cam_front:
+            translation: [1.92, 0.0, 1.21]
+            pitch_deg: 3.0
+            yaw_deg: 0.0
+            fov_deg: 70.0
+            max_range_m: 120.0
+          cam_front_right:
+            translation: [1.92, -0.56, 1.21]
+            pitch_deg: 3.0
+            yaw_deg: -45.0
+            fov_deg: 70.0
+            max_range_m: 120.0
+          cam_front_left:
+            translation: [1.92, 0.56, 1.21]
+            pitch_deg: 3.0
+            yaw_deg: 45.0
+            fov_deg: 70.0
+            max_range_m: 120.0
+    pedestrians:
+      enabled: true
+      target_count: [2, 4]
+      update_interval_sec: 0.5
+      max_spawn_attempts: 20
+      spawn_ahead_m: [35.0, 120.0]
+      side_offset_m: [3.0, 6.0]
+      min_distance_from_ego_m: 18.0
+      min_distance_between_pedestrians_m: 10.0
+      runtime_max_spawn_per_update: 1
+      reject_spawn_if_visible: true
+      visible_spawn_front_m: 90.0
+      visible_spawn_rear_m: 5.0
+      visible_spawn_side_m: 18.0
+      despawn_behind_m: 35.0
+      despawn_ahead_m: 160.0
+      protect_moving_pedestrians_from_distance_despawn: true
+      walking_despawn_use_ego_frame: true
+      status_log_interval_sec: 5.0
+      control_interval_sec: 0.5
+      active_dist_m: 30.0
+      move_dist_m: 30.0
+      walking_speed_mps: [0.8, 1.3]
+      walking_stop_check_ahead_m: 40.0
+      walking_stop_at_target: true
+      walking_target_reach_m: 0.8
+      walking_stop_if_blocked: true
+      walking_blocked_duration_sec: 2.0
+      walking_blocked_progress_m: 0.25
+      walking_stop_if_position_stuck: true
+      walking_position_stuck_duration_sec: 2.0
+      walking_position_stuck_move_m: 0.15
+      walking_position_stuck_speed_mps: 0.1
+      standing_yaw_mode: random
+      standing_yaw_offset_deg: [-180.0, 180.0]
+      standing_spawn_source: lane_boundary
+      standing_fallback_to_route: false
+      standing_boundary_offset_m: 0.5
+      standing_candidate_interval_m: 5.0
+      standing_use_outer_lane_only: true
+      standing_include_opposite_outer_lane: true
+      opposite_link_search_max_distance_m: 25.0
+      opposite_link_min_overlap_ratio: 0.25
+      opposite_link_min_yaw_diff_deg: 135.0
+      standing_include_lane_colors: [white]
+      standing_include_lane_shapes: [Solid]
+      standing_exclude_lane_types: [530]
+      standing_exclude_signal_point_radius_m: 5.0
+      walking_spawn_source: crosswalk
+      walking_fallback_to_route: false
+      crosswalk_route_max_dist_m: 18.0
+      crosswalk_min_width_m: 2.0
+      behavior_weights:
+        roadside_standing: 0.55
+        crosswalk_walking: 0.45
+      model:
+        whitelist: []
+        exclude_names:
+          - Bicycle_Female1
+          - Ped_Pet1
+        exclude_prefixes:
+          - NCAP
+          - Animal
+          - Dog
+          - Deer
+          - Cat
+          - Horse
+          - Cow
+        exclude_contains: []
+    route_bev_visualizer_enabled: false
+    route_bev_visualizer_state_source: grpc
+    route_bev_visualizer_use_imshow: true
+    route_bev_visualizer_publish_image: true
+    route_bev_visualizer_route_json: runtime/current_route.json
+    route_bev_visualizer_window_title: AIM Route
+    ros_ctrl_cmd_topic: /ctrl_cmd_0
+    ros_ctrl_cmd_longitudinal_type: 1
+    ros_route_path_topic: /scenario_route_path
+    traffic_light_mode: fast
+    traffic_light_fast_color: G_WITH_GLEFT
+    traffic_light_fast_update_interval_sec: 0.5
+    traffic_light_fast_impulse: false
+    traffic_light_fast_set_sibling: true
+    pure_pursuit_speed_kp: 0.5
+    pure_pursuit_target_speed: 15.0
+    enable_npc_follow_brake: true
+    npc_follow_detect_distance_m: 25.0
+    npc_follow_slow_distance_m: 10.0
+    npc_follow_brake_distance_m: 2.5
+    npc_follow_same_lane_lateral_m: 3.0
+    npc_follow_max_brake: 1.0
+    npc_follow_min_speed: 0.0
+    npc_follow_ego_front_offset_m: 3.7
+    npc_follow_npc_rear_offset_m: 0.0
+    npc_follow_stop_ttc_sec: 1.5
+    npc_follow_max_state_age_sec: 3.0
+    accident_detection_enabled: true
+    accident_stall_duration_sec: 3.0
+    accident_min_elapsed_sec: 4.0
+    accident_ego_stall_speed_kmh: 1.0
+    accident_min_command_speed_kmh: 5.0
+    accident_ignore_brake_above: 0.4
+    accident_near_npc_distance_m: 12.0
+    accident_near_npc_forward_m: 12.0
+    accident_near_npc_side_m: 4.5
+    accident_near_pedestrian_distance_m: 3.0
+    accident_near_pedestrian_forward_m: 6.0
+    accident_near_pedestrian_side_m: 2.5
+    discard_moving_pedestrian_accidents: true
+    moving_pedestrian_speed_mps: 0.1
+    moving_pedestrian_slots:
+      - crosswalk_walking
+      - roadside_walking
+    lead_npc_pedestrian_block_accident_enabled: true
+    lead_npc_pedestrian_block_duration_sec: 2.0
+    lead_npc_pedestrian_block_lead_min_m: 0.0
+    lead_npc_pedestrian_block_lead_max_m: 25.0
+    lead_npc_pedestrian_block_npc_speed_mps: 0.5
+    lead_npc_pedestrian_block_ped_distance_m: 3.0
+    lead_npc_pedestrian_block_min_command_speed_kmh: 5.0
+    moving_pedestrian_accident_duration_sec: 2.0
+    moving_pedestrian_accident_front_npc_count: 3
+    moving_pedestrian_accident_front_max_m: 60.0
+    moving_pedestrian_accident_npc_speed_mps: 2.0
+    moving_pedestrian_accident_ped_distance_m: 4.0
+    moving_pedestrian_accident_min_command_speed_kmh: 5.0
+    lead_npc_stalled_block_accident_enabled: true
+    lead_npc_stalled_block_duration_sec: 6.0
+    lead_npc_stalled_block_lead_min_m: 0.0
+    lead_npc_stalled_block_lead_max_m: 8.0
+    lead_npc_stalled_block_npc_speed_mps: 0.5
+    lead_npc_stalled_block_min_command_speed_kmh: 5.0
+    lead_npc_stalled_block_min_brake: 0.4
+    cross_lane_npc_block_accident_enabled: true
+    cross_lane_npc_block_duration_sec: 4.0
+    cross_lane_npc_block_distance_m: 7.0
+    cross_lane_npc_block_forward_min_m: -2.0
+    cross_lane_npc_block_forward_max_m: 10.0
+    cross_lane_npc_block_side_m: 5.5
+    cross_lane_npc_block_npc_speed_mps: 0.5
+    cross_lane_npc_block_min_command_speed_kmh: 5.0
+    cross_lane_npc_block_require_opposite: true
+    static_obstacle_accident_enabled: true
+    static_obstacle_stall_duration_sec: 4.0
+    static_obstacle_min_command_speed_kmh: 2.0
+    static_obstacle_ignore_brake_above: 0.4
+    static_obstacle_progress_m: 0.5
+    static_obstacle_movement_m: 0.5
+    pure_pursuit_lookahead_m: 12.0
+    pure_pursuit_wheel_base_m: 2.9
+    pure_pursuit_max_steer_deg: 35.0
+    pure_pursuit_steer_sign: 1.0
+    pure_pursuit_steer_mode: angle
+    pure_pursuit_mid_corner_steer_boost_enabled: true
+    pure_pursuit_mid_corner_back_m: 6.0
+    pure_pursuit_mid_corner_ahead_m: 10.0
+    pure_pursuit_mid_corner_turn_threshold_deg: 25.0
+    pure_pursuit_mid_corner_passed_turn_threshold_deg: 12.0
+    pure_pursuit_mid_corner_entry_suppress_threshold_deg: 20.0
+    pure_pursuit_corner_entry_lookahead_m: 6.0
+    pure_pursuit_corner_entry_steer_gain: 0.75
+    pure_pursuit_mid_corner_alpha_threshold_deg: 5.0
+    pure_pursuit_mid_corner_steer_gain: 1.25
+    pure_pursuit_slowdown_distance_m: 8.0
+    pure_pursuit_min_speed: 2.0
+    pure_pursuit_arrival_stop_distance_m: 8.0
+    pure_pursuit_max_cross_track_error_m: 10.0
+    ego_spawn_offset_m: 5.0
+    ego_start_settle_sec: 0.2
+    ego_pre_start_hold_sec: 0.8
+    ego_pre_start_hold_interval_sec: 0.05
+    goal_offset_from_end_m: 3.0
+    use_ego_destination: false
+    use_route_waypoints: false
+    decision_range_m: 10.0
+    run_duration_sec: 8.0
+    timeout_sec: 0.0
+    goal_tolerance_m: 4.0
+    restart_on_morai_route_complete: true
+    route_complete_goal_tolerance_m: 15.0
+    complete_on_end_link: true
+    end_link_hold_sec: 0.5
+    off_route_timeout_sec: 3.0
+    off_route_grace_sec: 2.0
+    check_period_sec: 0.05
+    max_laps: 0
+    link_speed_ratio: 40
+    constant_velocity: 15

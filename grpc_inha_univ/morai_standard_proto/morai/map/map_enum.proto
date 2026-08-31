@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package morai_sim_api.map;
+
+option optimize_for = SPEED;
+option csharp_namespace = "CoreLib.Grpc.Protobuf.MoraiSimAPI.Map";
+
+/**
+ * 주변 링크 타입
+ */
+enum NeighborLinkType
+{
+    NEIGHBORLINK_TYPE_UNSPECIFIED = 0;
+    NEIGHBORLINK_TYPE_LEFT = 1;
+    NEIGHBORLINK_TYPE_RIGHT = 2;
+    NEIGHBORLINK_TYPE_FROM = 3;
+    NEIGHBORLINK_TYPE_TO = 4;
+}
