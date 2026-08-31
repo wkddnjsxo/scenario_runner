@@ -195,7 +195,7 @@ export ROS_MASTER_URI=http://localhost:11311
 export ROS_HOSTNAME=localhost
 export EXPERIMENT_MODE={scenario}
 echo "[실험] EXPERIMENT_MODE={scenario} 설정"
-cd /root/aim_ws
+cd "$HOME/aim_ws"
 echo "[실험] 작업 디렉토리: $(pwd)"
 source /opt/ros/noetic/setup.bash
 source devel/setup.bash

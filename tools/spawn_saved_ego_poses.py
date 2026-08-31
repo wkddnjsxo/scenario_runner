@@ -18,13 +18,19 @@ from utils.morai_sim_bridge import MoraiSimBridge
 
 
 def runner_path(path):
-    if not path or os.path.isabs(path):
+    if not path:
+        return path
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
         return path
     return os.path.join(RUNNER_ROOT, path)
 
 
 def workspace_path(path):
-    if not path or os.path.isabs(path):
+    if not path:
+        return path
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
         return path
     return os.path.join(WORKSPACE_ROOT, path)
 

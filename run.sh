@@ -2,21 +2,24 @@
 set -euo pipefail
 
 RUNNER_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROS_WS_ROOT="${AIM_WS_ROOT:-/home/jang/aim_ws}"
-DEFAULT_COLLECTOR_ROOT="$(cd "$RUNNER_ROOT/.." && pwd)/projects/morai-3d-detection"
+ROS_WS_ROOT="${AIM_WS_ROOT:-$HOME/aim_ws}"
+DEFAULT_COLLECTOR_ROOT="$HOME/projects/morai-3d-detection"
 COLLECTOR_ROOT="${MORAI_3D_PROJECT_ROOT:-$DEFAULT_COLLECTOR_ROOT}"
 COLLECTOR_SCRIPT="${MORAI_3D_COLLECTOR_SCRIPT:-$COLLECTOR_ROOT/morai_3d_live.py}"
-DATASET_ROOT="${DATASET_ROOT:-/home/jang/dataset}"
+DATASET_ROOT="${DATASET_ROOT:-$HOME/dataset}"
 
 cd "$RUNNER_ROOT"
 
 RUNNER_ARGS=("$@")
 set --
 
-if [ -f "$ROS_WS_ROOT/devel/setup.bash" ]; then
-  # shellcheck disable=SC1091
-  source "$ROS_WS_ROOT/devel/setup.bash"
+if [ ! -f "$ROS_WS_ROOT/devel/setup.bash" ]; then
+  echo "[run] ERROR: ROS workspace setup not found: $ROS_WS_ROOT/devel/setup.bash" >&2
+  echo "[run] Set AIM_WS_ROOT to a built catkin workspace." >&2
+  exit 1
 fi
+# shellcheck disable=SC1091
+source "$ROS_WS_ROOT/devel/setup.bash"
 
 if [ -f "$ROS_WS_ROOT/morai_bridge.env" ]; then
   # shellcheck disable=SC1091
@@ -26,6 +29,7 @@ fi
 # Python code uses AIM_WS_ROOT only for ROS/BEV resources. gRPC and MGeo are
 # resolved from RUNNER_ROOT and therefore use this standalone copy.
 export AIM_WS_ROOT="$ROS_WS_ROOT"
+export DATASET_ROOT
 
 export GRPC_POLL_STRATEGY="${GRPC_POLL_STRATEGY:-epoll1}"
 

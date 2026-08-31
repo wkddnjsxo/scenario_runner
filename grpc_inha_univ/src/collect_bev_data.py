@@ -4,7 +4,7 @@
 BEV 토픽 데이터 수집 및 저장
 ===========================
 /bev/lane, /bev/obstacle, /bev/global_path 를 구독하고
-/root/aim_ws/data/bev_map/ 에 저장
+$HOME/data/bev_map/ 에 저장 (BEV_DATA_DIR로 변경 가능)
 
 파일명 형식: map_<timestamp>_<loop_count>.npz
 """
@@ -21,7 +21,11 @@ from datetime import datetime
 # ======================================================================
 # 설정
 # ======================================================================
-DATA_DIR = "/root/aim_ws/data/bev_map"
+DATA_DIR = os.path.abspath(
+    os.path.expanduser(
+        os.path.expandvars(os.environ.get("BEV_DATA_DIR", "$HOME/data/bev_map"))
+    )
+)
 
 class BEVDataCollector:
     def __init__(self):

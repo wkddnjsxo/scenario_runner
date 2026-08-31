@@ -8,8 +8,9 @@
 
 > **현재 저장소만 다른 PC에 clone해서 바로 실행할 수는 없습니다.**
 >
-> 현재 `/home/jang` 환경에서는 동작하도록 구성되어 있지만 ROS 작업공간,
-> 데이터 수집기, MORAI Simulator와 센서 네트워크 설정은 저장소 외부에 있습니다.
+> 사용자 이름에 대한 하드코딩은 제거되어 `$HOME` 기준으로 경로를 계산합니다.
+> 그러나 ROS 작업공간, 데이터 수집기, MORAI Simulator와 센서 네트워크 설정은
+> 저장소 외부에 있으므로 이 저장소 하나만으로는 실행할 수 없습니다.
 
 ### 저장소에 포함된 항목
 
@@ -25,8 +26,8 @@
 | 항목 | 현재 기본 위치/조건 | 없을 때 발생하는 문제 |
 |---|---|---|
 | ROS Noetic 환경 | Ubuntu 20.04 + ROS Noetic | `rospy`, ROS 도구를 불러올 수 없음 |
-| 빌드된 catkin 작업공간 | `/home/jang/aim_ws/devel/setup.bash` | `morai_msgs` 등 ROS 메시지를 불러올 수 없음 |
-| 데이터 수집기 프로젝트 | `/home/jang/projects/morai-3d-detection` | `morai_3d_live.py`를 찾지 못해 `run.sh` 종료 |
+| 빌드된 catkin 작업공간 | `$HOME/aim_ws/devel/setup.bash` | `morai_msgs` 등 ROS 메시지를 불러올 수 없음 |
+| 데이터 수집기 프로젝트 | `$HOME/projects/morai-3d-detection` | `morai_3d_live.py`를 찾지 못해 `run.sh` 종료 |
 | MORAI Simulator | gRPC `192.168.80.1:7789` | 시나리오가 MORAI에 연결되지 않음 |
 | rosbridge 연결 | 1개 이상 필요; 현재 장비는 TCP 9090/9091 두 개 사용 | MORAI ROS 토픽이 들어오지 않음 |
 | MORAI 센서 설정 | 아래의 정확한 ROS 토픽 발행 | 동기화 프레임이 저장되지 않음 |
@@ -34,7 +35,7 @@
 데이터 수집기는 현재 다음 프로젝트의 여러 로컬 모듈에도 의존합니다.
 
 ```text
-/home/jang/projects/morai-3d-detection/
+$HOME/projects/morai-3d-detection/
 ├── morai_3d_live.py
 ├── morai_sync.py
 ├── morai_dataset.py
@@ -50,20 +51,31 @@ SciPy, PyTorch 등이 필요합니다.
 
 | 용도 | 기본값 | 변경 방법 |
 |---|---|---|
-| ROS/catkin 작업공간 | `/home/jang/aim_ws` | `AIM_WS_ROOT` |
-| 수집기 프로젝트 | `/home/jang/projects/morai-3d-detection` | `MORAI_3D_PROJECT_ROOT` |
+| ROS/catkin 작업공간 | `$HOME/aim_ws` | `AIM_WS_ROOT` |
+| 수집기 프로젝트 | `$HOME/projects/morai-3d-detection` | `MORAI_3D_PROJECT_ROOT` |
 | 수집기 단일 파일 | `<수집기 프로젝트>/morai_3d_live.py` | `MORAI_3D_COLLECTOR_SCRIPT` |
-| 데이터 저장 위치 | `/home/jang/dataset` | `DATASET_ROOT` |
+| 데이터 저장 위치 | `$HOME/dataset` | `DATASET_ROOT` |
 | MORAI gRPC 주소 | `192.168.80.1:7789` | `config/local_override.yaml` |
 
-다른 사용자 계정이나 설치 경로에서 실행하려면 적어도 다음처럼 환경을 지정해야
-합니다.
+아래의 기본 폴더 구조와 다른 위치에 설치했다면 다음처럼 환경을 지정합니다.
 
 ```bash
 export AIM_WS_ROOT="$HOME/aim_ws"
 export MORAI_3D_PROJECT_ROOT="$HOME/projects/morai-3d-detection"
 export DATASET_ROOT="$HOME/dataset"
 ./run.sh
+```
+
+아래 공통 폴더 구조를 사용한다면 환경변수를 별도로 지정할 필요가 없습니다.
+
+```text
+$HOME/
+├── aim_ws/
+│   └── devel/setup.bash
+├── scenario_runner/
+└── projects/
+    └── morai-3d-detection/
+        └── morai_3d_live.py
 ```
 
 `AIM_WS_ROOT` 아래에는 빌드가 완료된 `devel/setup.bash`와 `morai_msgs` 패키지가
@@ -100,8 +112,8 @@ rostopic list | grep -E '^/(cam_front|cam_front_left|cam_front_right|lidar3D|Ego
   공개 저장소에 올리기 전에 재배포 권한을 확인해야 합니다.
 - `.gitignore`는 `__pycache__/`, `runtime/`, `ego_pose_checks/`, 로컬 override와
   실행 산출물을 제외합니다.
-- 완전한 clone-and-run 저장소로 만들려면 데이터 수집기 코드 포함, ROS 설치 및
-  `morai_msgs` 빌드 자동화, 절대경로 제거, 전체 의존성 명시가 추가로 필요합니다.
+- 완전한 단일 저장소 clone-and-run 구성을 만들려면 데이터 수집기 코드 포함,
+  ROS 설치 및 `morai_msgs` 빌드 자동화, 전체 의존성 명시가 추가로 필요합니다.
 
 ## License
 
@@ -115,13 +127,13 @@ License의 적용 대상이 아닙니다. 해당 자료의 사용 및 재배포 
 ## Run
 
 ```bash
-cd /home/jang/scenario_runner
+cd "$HOME/scenario_runner"
 ./run.sh
 ```
 
 `run.sh` starts the MORAI 3-camera/LiDAR dataset collector first, waits until
 its `/dataset_control` subscription is ready, and then starts the scenario.
-Collected scenes are written under `/home/jang/dataset` by default. Override
+Collected scenes are written under `$HOME/dataset` by default. Override
 the locations with `DATASET_ROOT`, `MORAI_3D_PROJECT_ROOT`, or
 `MORAI_3D_COLLECTOR_SCRIPT` when needed. On `Ctrl+C`, the collector removes the
 scene that was still in progress while preserving completed scenes.

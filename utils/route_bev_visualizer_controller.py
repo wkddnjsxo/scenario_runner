@@ -17,7 +17,7 @@ class RouteBEVVisualizerController:
         grpc_host="127.0.0.1",
         grpc_port=7789,
         grpc_client_key="aim_scenario_runner",
-        grpc_src="/root/aim_ws/grpc_inha_univ/src",
+        grpc_src=None,
         python_executable=None,
     ):
         self.workspace_root = os.path.abspath(workspace_root)
@@ -30,7 +30,10 @@ class RouteBEVVisualizerController:
         self.grpc_host = str(grpc_host)
         self.grpc_port = int(grpc_port)
         self.grpc_client_key = str(grpc_client_key)
-        self.grpc_src = os.path.abspath(grpc_src)
+        if grpc_src is None:
+            runner_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            grpc_src = os.path.join(runner_root, "grpc_inha_univ", "src")
+        self.grpc_src = os.path.abspath(os.path.expanduser(os.path.expandvars(grpc_src)))
         self.python_executable = python_executable or sys.executable
         self.process = None
 

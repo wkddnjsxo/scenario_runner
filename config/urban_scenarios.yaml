@@ -20,10 +20,10 @@ scenarios:
     route_setup_attempts: 5
     drive_control_mode: pure_pursuit
     dataset_enabled: true
-    dataset_root: /home/jang/dataset
+    dataset_root: ${HOME}/dataset
     dataset_scene_prefix: scene
     dataset_scene_digits: 2
-    dataset_collect_root: /home/jang/dataset
+    dataset_collect_root: ${HOME}/dataset
     dataset_collect_scene_prefix: scen
     dataset_stop_scene_index: 150
     dataset_stop_settle_sec: 5.0

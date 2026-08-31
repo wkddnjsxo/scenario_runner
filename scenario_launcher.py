@@ -31,11 +31,26 @@ def load_yaml(path):
     return data
 
 
+def resolve_path(path, base_dir=RUNNER_ROOT):
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
+        return os.path.abspath(path)
+    return os.path.abspath(os.path.join(base_dir, path))
+
+
 def resolve_paths(cfg):
     paths = cfg.get("paths", {})
     for key, val in paths.items():
-        if isinstance(val, str) and not os.path.isabs(val):
-            paths[key] = os.path.join(RUNNER_ROOT, val)
+        if isinstance(val, str):
+            paths[key] = resolve_path(val)
+
+
+def resolve_scenario_paths(cfg):
+    dataset_root = os.environ.get("DATASET_ROOT")
+    for key in ("dataset_root", "dataset_collect_root"):
+        value = dataset_root or cfg.get(key)
+        if isinstance(value, str):
+            cfg[key] = resolve_path(value)
 
 
 def get_scenario_cfg(zone_cfg, zone, scenario):
@@ -84,6 +99,7 @@ def main():
     zone_cfg = load_yaml(runner_path("config", f"{args.zone}_scenarios.yaml"))
 
     scenario_cfg = get_scenario_cfg(zone_cfg, args.zone, args.scenario)
+    resolve_scenario_paths(scenario_cfg)
 
     print("[DEBUG] creating MoraiSimBridge")
     sim_bridge = MoraiSimBridge(global_cfg)

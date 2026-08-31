@@ -16,7 +16,10 @@ WORKSPACE_ROOT = RUNNER_ROOT
 
 
 def runner_path(path):
-    if not path or os.path.isabs(path):
+    if not path:
+        return path
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
         return path
     return os.path.join(RUNNER_ROOT, path)
 
@@ -45,8 +48,12 @@ def load_runtime_config(config_path=None):
     cfg = deep_merge_dict(cfg, local_cfg)
     paths = cfg.get("paths", {})
     for key, value in list(paths.items()):
-        if isinstance(value, str) and not os.path.isabs(value):
-            paths[key] = os.path.join(RUNNER_ROOT, value)
+        if not isinstance(value, str):
+            continue
+        value = os.path.expanduser(os.path.expandvars(value))
+        if not os.path.isabs(value):
+            value = os.path.join(RUNNER_ROOT, value)
+        paths[key] = os.path.abspath(value)
     return cfg
 
 

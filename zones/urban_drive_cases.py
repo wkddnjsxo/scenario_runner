@@ -23,17 +23,25 @@ from utils.geometry_utils import (
 )
 
 RUNNER_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WORKSPACE_ROOT = os.path.abspath(os.environ.get("AIM_WS_ROOT", "/home/jang/aim_ws"))
+WORKSPACE_ROOT = os.path.abspath(
+    os.path.expanduser(os.path.expandvars(os.environ.get("AIM_WS_ROOT", "$HOME/aim_ws")))
+)
 
 
 def runner_relative_path(path):
-    if not path or os.path.isabs(path):
+    if not path:
+        return path
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
         return path
     return os.path.join(RUNNER_ROOT, path)
 
 
 def workspace_relative_path(path):
-    if not path or os.path.isabs(path):
+    if not path:
+        return path
+    path = os.path.expanduser(os.path.expandvars(path))
+    if os.path.isabs(path):
         return path
     return os.path.join(WORKSPACE_ROOT, path)
 
@@ -920,7 +928,10 @@ class UrbanRouteDriveCase(ScenarioBase):
                 grpc_host=grpc_cfg.get("host", "127.0.0.1"),
                 grpc_port=grpc_cfg.get("port", 7789),
                 grpc_client_key=grpc_cfg.get("client_key", "aim_scenario_runner"),
-                grpc_src=path_cfg.get("grpc_src", "/root/aim_ws/grpc_inha_univ/src"),
+                grpc_src=path_cfg.get(
+                    "grpc_src",
+                    os.path.join(RUNNER_ROOT, "grpc_inha_univ", "src"),
+                ),
                 python_executable=self.cfg.get("route_bev_visualizer_python"),
             )
 
